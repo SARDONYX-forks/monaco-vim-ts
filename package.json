@@ -2,16 +2,17 @@
   "name": "monaco-vim",
   "version": "0.4.1",
   "description": "Vim keybindings for monaco-editor",
-  "main": "./lib/index.js",
+  "main": "./dist/monaco-vim.umd.js",
+  "module": "./dist/monaco-vim.es.js",
+  "type": "module",
+  "types": "./types/main.d.ts",
   "scripts": {
+    "build": "npm run clean && tsc && vite build",
+    "clean": "rimraf lib dist",
+    "dev": "vite",
+    "prepublishOnly": "npm run build",
     "test": "echo \"No test in this repo\"",
-    "start": "webpack-dev-server --mode development --host=0.0.0.0 --port=8080",
-    "clean": "rm -rf lib dist local",
-    "dist": "webpack --mode production",
-    "babel": "NODE_ENV=production babel ./src -d lib --ignore src/demo.js",
-    "build": "npm run clean && npm run babel && npm run dist",
-    "local": "mkdir -p local && cp -r lib dist package.json local",
-    "prepublishOnly": "npm run build"
+    "watch": "vite build --watch"
   },
   "keywords": [
     "monaco-editor",
@@ -21,28 +22,17 @@
     "dist",
     "lib",
     "src",
-    "LICENSE",
-    "LICENSE.codemirror.txt",
+    "LICENSES",
     "README.md"
   ],
   "author": "Brijesh Bittu <brijesh@bitwiser.in> (http://bitwiser.in/)",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.16.11",
-    "babel-loader": "^8.2.3",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "css-loader": "^6.6.0",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.5.0",
-    "monaco-editor": "^0.33.0",
-    "monaco-editor-webpack-plugin": "^7.0.1",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "@types/node": "^20.12.13",
+    "monaco-editor": "^0.49.0",
+    "rimraf": "^5.0.7",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.12"
   },
   "peerDependencies": {
     "monaco-editor": "*"
